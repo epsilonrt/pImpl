@@ -1,4 +1,4 @@
-# pimpl
+# pimp
 PImpl Idiom in C++ for platformio
 
 When changes are made to a [header file](https://www.geeksforgeeks.org/difference-header-file-library/), all sources including it needs to be recompiled. In large projects and libraries, it can cause build time issues due to the fact that even when a small change to the implementation is made everyone has to wait some time until they compile their code. One way to solve this problem is by using the **PImpl Idiom**, which **hides the implementation in the headers and includes an interface file** that **compiles instantly**.
@@ -16,7 +16,7 @@ It is also very strongly inspired by the implementation of the library [Qt](http
 Here is a simplified example of the [Device](https://github.com/epsilonrt/libmodbuspp/blob/master/include/modbuspp/device.h) class from the [libmosbuspp](https://github.com/epsilonrt/libmodbuspp) library.
 
 ```cpp
-#include <pimpl.h>
+#include <pimp.h>
 
   class Device  {
     public:
