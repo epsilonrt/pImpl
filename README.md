@@ -7,7 +7,9 @@ The PImpl Idiom **(Pointer to IMPLementation)** is a technique used for separati
 
 ![](https://media.geeksforgeeks.org/wp-content/uploads/20190606163517/Header-and-Implementation-file-structure-within-the-PImpl-Idiom-2.jpg)
 
-This library provides an implementation derived from the article [PImpl Idiom in C++ with Examples](https://www.geeksforgeeks.org/pimpl-idiom-in-c-with-examples/) and uses a [std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr). Thus, this library can only be used on platforms with an STL implementation.
+This library provides an implementation derived from the article [PImpl Idiom in C++ with Examples](https://www.geeksforgeeks.org/pimpl-idiom-in-c-with-examples/) and uses a [std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr). 
+
+Thus, this library **can only be used on platforms with an STL implementation** as it is the case for the [Arduino](https://www.arduino.cc/) frameworks for [ESP32](https://www.espressif.com/en/products/socs/esp32) and [ESP8266](https://www.espressif.com/en/products/socs/esp8266), [STM32](https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html), [Teensy 3 and more)[https://www.pjrc.com/teensy/] (but not for [AVR](https://www.microchip.com/design-centers/8-bit/avr-mcus) based platforms) and as well as for the [mbed](https://www.mbed.com/en/) framework, and for native PC, Linux, and Mac...
 
 ## The d-pointer
 
