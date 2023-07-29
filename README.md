@@ -113,7 +113,7 @@ It's not all about binary compatibility. The d-pointer has other benefits:
 * The header file is clean of implementation details and can serve as the API reference.  
 * Since the header files needed for implementation are moved from the header file into the implementation (source) file, compiles are much faster.  
 
-It is indeed true that the above benefits appear trivial. 
+It is indeed true that the above benefits appear trivial ;-) 
 
 ### The q-pointer
 
