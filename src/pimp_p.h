@@ -4,8 +4,8 @@
 
    SPDX-License-Identifier: BSD-3-Clause
 */
-#include "pimp.h"
 #pragma once
+#include "pimp.h"
 
 /**
  * @brief The PimpClass::Private class

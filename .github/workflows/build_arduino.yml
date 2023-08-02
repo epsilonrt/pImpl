@@ -1,4 +1,4 @@
-name: Build with Arduino framework
+name: Embedded Build
 
 on:
   push:

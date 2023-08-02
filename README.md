@@ -1,28 +1,109 @@
 # pimp
-pImpl Idiom in C++ for platformio
+pImpl Idiom in C++
 
 [![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/epsilonrt/pimp?include_prereleases)](https://github.com/epsilonrt/pimp/releases) 
 [![PlatformIO Registry](https://badges.registry.platformio.org/packages/epsilonrt/library/pimp.svg)](https://registry.platformio.org/libraries/epsilonrt/pimp) 
 [![Arduino Registry](https://www.ardu-badge.com/badge/pimp.svg)](https://www.arduinolibraries.info/libraries/pimp) 
 
+[![Desktop Build](https://github.com/epsilonrt/pimp/actions/workflows/build_desktop.yml/badge.svg)](https://github.com/epsilonrt/pimp/actions/workflows/build_desktop.yml)
 [![Arduino Build](https://github.com/epsilonrt/pimp/actions/workflows/build_arduino.yml/badge.svg)](https://github.com/epsilonrt/pimp/actions/workflows/build_arduino.yml) 
-[![Desktop Build](https://github.com/epsilonrt/pimp/actions/workflows/build_desktop.yml/badge.svg)](https://github.com/epsilonrt/pimp/actions/workflows/build_desktop.yml) 
 
 ---
 
-"Pointer to implementation" or "pImpl" is a C++ programming technique that removes implementation details of a class from its object representation by    placing them in a separate class, accessed through an opaque pointer. This technique is used to construct C++ library interfaces with stable ABI and to reduce compile-time dependencies.
+_The pImpl Idiom **(Pointer to IMPLementation)** is a technique used for separating implementation from the interface. It minimizes header exposure and helps programmers to reduce build dependencies by moving the private data members in a separate class and accessing them through an [opaque pointer](https://www.geeksforgeeks.org/opaque-pointer/)_.
 
-When changes are made to a [header file](https://www.geeksforgeeks.org/difference-header-file-library/), all sources including it needs to be recompiled. In large projects and libraries, it can cause build time issues due to the fact that even when a small change to the implementation is made everyone has to wait some time until they compile their code. One way to solve this problem is by using the **pImpl Idiom**, which **hides the implementation in the headers and includes an interface file** that **compiles instantly**.
+This is a C++ programming technique that removes implementation details of a class from its object representation by    placing them in a separate class, accessed through an opaque pointer. This technique is used to construct C++ library interfaces with stable ABI and to reduce compile-time dependencies.
 
-The pImpl Idiom **(Pointer to IMPLementation)** is a technique used for separating implementation from the interface. It minimizes header exposure and helps programmers to reduce build dependencies by moving the private data members in a separate class and accessing them through an [opaque pointer](https://www.geeksforgeeks.org/opaque-pointer/).
+<!-- ![](extras/images/pimp/pimp.svg) -->
+<p align="center">
+  <img src="extras/images/pimp/pimp.svg" />
+</p>
 
-![](https://media.geeksforgeeks.org/wp-content/uploads/20190606163517/Header-and-Implementation-file-structure-within-the-pImpl-Idiom-2.jpg)
+As can be seen in the diagram above, the **User** class has a single data member, **d_ptr** which is a pointer to the implementing class **User::Private**. The **User::Private** class is defined in the **user_p.h** file and is used only in the **user.cpp** file. The **User** class is defined in the **user.h** file and will constitute the API of the **User** class. The user of the **User** class does not need to know the definition of the **User::Private** class. It will use the public methods of the **User** class to access the private member data of the **User::Private** class (name() and setName() allow access to the private data **name* * for example).
 
-This library provides an implementation derived from the article [pImpl Idiom in C++ with Examples](https://www.geeksforgeeks.org/pimpl-idiom-in-c-with-examples/) and uses a [std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr). 
+The **pimp lib** is very strongly inspired by the implementation of the [Qt](https://www.qt.io/) library which uses a **d** pointer to the private class (implemantation) and a **q** pointer to the public class (API). The explanations below are taken from the [D-Pointer](https://wiki.qt.io/D-Pointer) page of the Qt wiki. The explanations are in the context of the Qt library but they are also valid for the **pimp lib** and may be read to own [wiki page](https://github.com/epsilonrt/pimp/wiki/The-d%E2%80%90pointer) in the context of the **pimp lib**.
 
-Thus, this library **can only be used on platforms with an STL implementation** as it is the case for the [Arduino](https://www.arduino.cc/) frameworks for [ESP32](https://www.espressif.com/en/products/socs/esp32) and [ESP8266](https://www.espressif.com/en/products/socs/esp8266), [STM32](https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html), [Teensy 3 and more](https://www.pjrc.com/teensy/) (but not for [AVR](https://www.microchip.com/design-centers/8-bit/avr-mcus) based platforms) and as well as for the [mbed](https://www.mbed.com/en/) framework, and for native PC, Linux, and Mac...
+The **pimp lib** provide a [PimpClass](https://epsilonrt.github.io/class_pimp_class.html) that can be used as a base class for any class that needs to use the pImpl idiom. The private implementation class must be defined in the source file of the class that uses it or in a private header file (with _p suffix for example). [PimpClass::Private](https://epsilonrt.github.io/struct_pimp_class_1_1_private.html) is a friend of the class that uses it. Then, **pimp lib** provide a set of macros that can be used to hide the private implementation class and the private implementation pointer.
 
-## List of platforms supported by pimp
+Thus, the complete example of the **User** class using the **pimp lib** is as follows:
+
+**user.h**, the API of the **User** class:
+```cpp
+#include <pimp.h>
+
+class User : public PimpClass {
+  public:
+    User();
+    User (const std::string &name, int age);
+    std::string name() const;
+    int age() const;
+    void setAge (int age);
+    void setName (const std::string &name);
+  protected:
+    class Private;
+    User (Private &dd);
+  private:
+    PIMP_DECLARE_PRIVATE (User)
+};
+```
+
+**user_p.h**, the private implementation class of the **User** class:
+```cpp
+#include "user.h"
+class User::Private : public PimpClass::Private {
+  public:
+    std::string name;
+    int age;
+    Private (User *q);
+    PIMP_DECLARE_PUBLIC (User)
+};
+```
+
+**user.cpp**, the source file of the **User** class:
+```cpp
+#include "user_p.h"
+
+std::string User::name() const {
+  PIMP_D (const User);
+  return d->name;
+}
+
+int User::age() const {
+  PIMP_D (const User);
+  return d->age;
+}
+
+void User::setAge (int age) {
+  PIMP_D (User);
+  d->age = age;
+}
+
+void User::setName (const std::string &name) {
+  PIMP_D (User);
+  d->name = name;
+}
+
+User::User() : PimpClass (*new Private (this)) {
+}
+
+User::User (Private &dd) : PimpClass (dd) {
+}
+
+User::Private::Private (User *q) : PimpClass::Private (q), age (0) {}
+
+User::User (const std::string &name, int age) : User() {
+  PIMP_D (User);
+  d->name = name;
+  d->age = age;
+}
+```
+<p align="center">
+  <img src="extras/images/pimp_real/pimp_real.svg" />
+</p>
+
+> The **pimp lib** uses [std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr), thus, this library **can only be used on platforms with a STL implementation** (see the list below).
+
+**List of platforms supported by pimp**
 
 **Embedded**  
 * [Atmel SAM](https://docs.platformio.org/en/stable/platforms/atmelsam.html#platform-atmelsam)  
@@ -37,400 +118,5 @@ Thus, this library **can only be used on platforms with an STL implementation** 
 * [TI TIVA](https://docs.platformio.org/en/stable/platforms/titiva.html#platform-titiva)
 
 **Desktop**  
-* [native](https://docs.platformio.org/en/stable/platforms/native.html  (Windows, Linux, MacOS)  
+* [native](https://docs.platformio.org/en/stable/platforms/native.html)  (Windows, Linux, MacOS)  
 
-## The d-pointer
-
-pimp is very strongly inspired by the implementation of the [Qt](https://www.qt.io/) library which uses a **d** pointer to the private class (implemantation) and a **q** pointer to the public class (API). The explanations below are taken from the [D-Pointer](https://wiki.qt.io/D-Pointer) page of the Qt wiki.
-
-The trick is to keep the size of all public classes of a library constant by only storing a single pointer. This pointer points to a private/internal data structure that contains all the data. The size of this internal structure can shrink or grow without having any side-effect on the application because the pointer is accessed only in the library code and from the application's point of view the size of the object never changes - it's always the size of the pointer. This pointer is called the d-pointer.
-
-The spirit of this pattern is outlined in the code below (all code in this article doesn't have destructors, of course you should add them in real code).
-
-**widget.h**
-
-```cpp
- /* 
-  Since d_ptr is an unique pointer and is never referended in header file (it would cause a compile error) 
-  Widget::Private doesn't have to be included, but forward-declared instead.
-  The definition of the class can be written in widget.cpp or in a separate file, say widget_p.h 
- */
- 
- class Widget
- {
-     // ...
-     Rect geometry() const;
-     virtual ~Widget(); // virtual destructor is needed for inheritance, no default implementation to use unique_ptr! 
-     // ... 
- 
- private:
-     class Private; // forward declaration of the private class
-     std::unique_ptr<Private> d_ptr; // the d-pointer for the pImpl idiom, all magic is here
- };
-```
-
-**widget_p.h** which is the private header file of the widget class
-
-```cpp
-/* widget_p.h (_p means private) */
-struct Widget::Private
-{
-    Rect geometry;
-    std::string stylesheet;
-    virtual ~Private() = default;
-};
-```
-
-**widget.cpp**
-
-```cpp
-// With this #include, we can access Widget::Private.
-#include "widget_p.h"
-
-Widget::Widget() : d_ptr(new Private)
-{
-    // Call some methods of the private class
-    // the initialization of private data is the 
-    // responsibility of the constructor of the Private class.
-}
-
-Rect Widget::geometry() const
-{
-    // The d-ptr is only accessed in the library code
-    return d_ptr->geometry;
-}
-
-Widget::~Widget()
-{
-    // Do what is necessary properly during the destruction, 
-    // but not the destruction of the private data because 
-    // it is the Private class which takes care of it.
-    // Typically we call here the close() method or something like that.
-    // No need to delete d_ptr, it's an unique_ptr
-}
-```
-
-Next, there's an example of a child class based on Widget.
-
-**label.h**
-
-```cpp
-class Label : public Widget
-{
-    // ...
-    std::string text();
-
-private:
-     class Private;
-    // Each class maintains its own d-pointer
-     std::unique_ptr<Private> d_ptr;
-};
-```
-
-**label.cpp**
-
-```cpp
-// Unlike Widget::Private, the author decided Label::Private
-// to be defined in the source file itself
-struct Label::Private
-{
-    std::string text;
-};
-
-Label::Label() : d_ptr(new Private)
-{
-}
-
-std::string Label::text()
-{
-    return d_ptr->text;
-}
-```
-
-With the above structure, CuteApp never accesses the d-pointer directly. And since the d-pointer is only ever accessed in WidgetLib and WidgetLib is recompiled for every release, the Private class can freely change with no impact on CuteApp.
-
-**Other benefits of d-pointer**  
-It's not all about binary compatibility. The d-pointer has other benefits:
-
-* Hide implementation details - We can ship WidgetLib with just the header files and the binaries. The .cpp files can be closed source.  
-* The header file is clean of implementation details and can serve as the API reference.  
-* Since the header files needed for implementation are moved from the header file into the implementation (source) file, compiles are much faster.  
-
-It is indeed true that the above benefits appear trivial ;-) 
-
-### The q-pointer
-
-So far, we have only seen the d-pointer as a C-style data structure. In reality, it contains private methods (helper functions). For example, Label::Private might have a getLinkTargetFromPoint() helper function that is required to find the link target when the mouse is clicked. In many cases, these helper methods require access to the public class i.e some functions from Label or from its base class Widget. For example, a helper method, setTextAndUpdateWidget() might want to call Widget::update() which is a public method to schedule a redraw the Widget. So, the Widget::Private stores a pointer to the public class called the q-pointer. Modifying the code above for the q-pointer, we get:
-
-**widget.h**
-
-```cpp
-
-class Widget::Private;
-
-class Widget
-{
-    // ...
-    Rect geometry() const;
-    // ...
-private:
-     class Private;
-     std::unique_ptr<Private> d_ptr;
-};
-```
-
-**widget_p.h**
-
-```cpp
-struct Widget::Private
-{
-    // Constructor that initializes the q-ptr
-    Private(Widget *q) : q_ptr(q) { }
-    Widget * const q_ptr; // q-ptr points to the API class
-    Rect geometry;
-    std::string stylesheet;
-};
-```
-
-**widget.cpp**
-
-```cpp
-#include "widget_p.h"
-// Create private data.
-// Pass the 'this' pointer to initialize the q-ptr
-Widget::Widget() : d_ptr(new Private(this))
-{
-}
-
-Rect Widget::geometry() const
-{
-    // the d-ptr is only accessed in the library code
-    return d_ptr->geometry;
-}
-
-Widget::~Widget()
-{
-    // Do what is necessary properly during the destruction, 
-    // but not the destruction of the private data because 
-    // it is the Private class which takes care of it.
-    // Typically we call here the close() method or something like that.
-    // No need to delete d_ptr, it's an unique_ptr
-}
-```
-
-Next, another class based on Widget.
-
-**label.h**
-
-```cpp
-class Label : public Widget
-{
-    // ...
-    std::string text() const;
-
-private:
-     class Private;
-     std::unique_ptr<Private> d_ptr;
-};
-```
-
-**label.cpp**
-
-```cpp
-// Unlike Widget::Private, the author decided Label::Private
-// to be defined in the source file itself
-struct Label::Private
-{
-    Private(Label *q) : q_ptr(q) { }
-    Label * const q_ptr;
-    std::string text;
-};
-
-Label::Label() : d_ptr(new Private(this))
-{
-}
-
-std::string Label::text()
-{
-    return d_ptr->text;
-}
-```
-
-### Inheriting d-pointers for optimization
-
-In the above code, creating a single Label results in the memory allocation for Label::Private and Widget::Private. If we were to employ this strategy, the situation becomes quite worse for classes like QListWidget - it is 6 levels deep in the class inheritance hierarchy and it would result in upto 6 memory allocations!
-
-This is solved by having an inheritance hierarchy for our private classes and having the class getting instantiated pass on a the d-pointer all the way up.
-
-Notice that when inheriting d-pointers, the declaration of the private class has to be in a separate file, for example widget_p.h. It's no longer possible to declare it in the widget.cpp file.
-
-**widget.h**
-
-```cpp
-class Widget
-{
-public:
-    Widget();
-    // ...
-protected:
-    // only subclasses may access the below
-    // allow subclasses to initialize with their own concrete Private
-    class Private;
-    Widget(Private &dd);
-    std::unique_ptr<Private> d_ptr;
-};
-```
-
-**widget_p.h**
-
-```cpp
-struct Widget::Private
-{
-    Private(Widget *q) : q_ptr(q) { } // constructor that initializes the q-ptr
-    Widget * const q_ptr; // q-ptr that points to the API class
-    Rect geometry;
-    std::string stylesheet;
-};
-```
-
-**widget.cpp**
-
-```cpp
-Widget::Widget() : d_ptr(new Private(this))
-{
-}
-
-Widget::Widget(Private &dd) : d_ptr(&dd)
-{
-}
-```
-
-**label.h**
-
-```cpp
-class Label : public Widget
-{
-public:
-    Label();
-    // ...
-protected:
-    class Private;
-    Label(Private &dd); // allow Label subclasses to pass on their Private
-    // notice how Label does not have a d_ptr! It just uses Widget's d_ptr.
-};
-```
-
-**label.cpp**
-
-```cpp
-#include "widget_p.h"
-
-class Label::Private : public Widget::Private
-{
-  public:
-    std::string text;
-};
-
-Label::Label()
- : Widget(*new Private) // initialize the d-pointer with our own Private
-{
-}
-
-Label::Label(Label::Private &dd) : Widget(dd)
-{
-}
-```
-
-Do you see the beauty? When we now create a Label object, it will create a Label::Private (which subclasses Widget::Private). It passes on the concrete d-pointer to Widget's protected constructor! Now, when a Label object is created, there is only one memory allocation. Label also has a protected constructor that can be used by its subclasses to provide their own private classes.
-
-## d-pointers with pimp library
-
-### PIMP_D and PIMP_Q
-
-A side effect of the optimization that we did in the previous step is that the q-ptr and d-ptr are of type Widget and Widget::Private. This means that the following won't work.
-
-**label.cpp**
-
-```cpp
-void Label::setText(const std::string &text)
-{
-   // won't work! since d_ptr is of type Label::Private even though it points to Widget::Private object
-   d_ptr->text = text;
-}
-
-// Hence, when accessing the d-pointer in a subclass, we need to static_cast to the appropriate type.
-
-void Label::setText(const std::string &text)
-{
-    Private *d = static_cast<Private*>(d_ptr); // cast to our private type
-    d->text = text;
-}
-```
-
-As you can see, it's not pretty having static_cast all over the place. Instead, there are two macros defined in pimp.h which make it straighforward:
-
-**pimp.h**
-
-```cpp
-#define PIMP_D(Class) Class::Private * const d = d_func()
-#define PIMP_Q(Class) Class * const q = q_func()
-```
-
-The PIMP_D macro casts the d-ptr to the appropriate type and assigns it to a local variable d. The PIMP_Q macro casts the this pointer to the appropriate type and assigns it to a local variable q. The PIMP_Q macro is useful when you need to access the public members of the class from the private class. For example, if you need to call a public slot from a private function, you can use the PIMP_Q macro to get access to the public members.
-
-**label.cpp**
-
-```cpp
-// With PIMP_D you can use the members of Label::Private from Label
-void Label::setText(const std::string &text)
-{
-    PIMP_D(Label);
-    d->text = text;
-}
-
-// With PIMP_Q you can use the members of Label from Label::Private
-void Label::Private::someHelperFunction()
-{
-    PIMP_Q(Label);
-    q->selectAll();
-}
-```
-
-### PIMP_DECLARE_PRIVATE and PIMP_DECLARE_PUBLIC
-
-You may use **PIMP_DECLARE_PRIVATE** macro in the public class. The macro reads:
-
-**pimp.h**
-
-```cpp
-#define PIMP_DECLARE_PRIVATE(Class)\
-  inline Class::Private* d_func() {\
-    return reinterpret_cast<Class::Private*>(d_ptr.get());\
-  }\
-  inline const Class::Private* d_func() const {\
-    return reinterpret_cast<const Class::Private *>(d_ptr.get());\
-  }\
-  friend class Class::Private;
-```
-
-This macro can be used this way:
-
-**label.h**
-
-```cpp
-class Label
-{
-public:
-    Label();
-    // ...
-protected:
-    class Private;
-    Label(Private &dd);
-private:
-    PIMP_DECLARE_PRIVATE(Label)
-};
-```
-
-The idea is that Label provides a function d_func() that allows access to its private internal class. The method itself is private (since the macro is inside a private section in label.h). The d_func() can however be invoked by **friends** (C++ friend) of Label. 
-
-The d_func also has the advantage to enforce const-correctness: In a const member function of MyClass  you need a PIMP_D(const MyClass) and thus you can only call const member functions in MyClass::Private. With a naked d_ptr you could also call non-const functions.

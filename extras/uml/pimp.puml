@@ -1,0 +1,25 @@
+@startuml
+
+/' Objects '/
+class User::Private {
+  +std::string name;
+  +int age;
+}
+
+class User {
+  +User()
+  +std::string name() const
+  +int age() const
+  +void setAge (int age)
+  +void setName (const std::string &name)
+  #d_ptr : std::unique_ptr<Private>
+}
+
+/' Inheritance relationships '/
+
+/' Aggregation relationships '/
+.User::Private o-- .User
+
+/' Nested objects '/
+
+@enduml

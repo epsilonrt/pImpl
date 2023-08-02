@@ -9,6 +9,5 @@ class User::Private : public PimpClass::Private {
     string_t name;
     int age;
 
-  // private:
     PIMP_DECLARE_PUBLIC (User)
 };
