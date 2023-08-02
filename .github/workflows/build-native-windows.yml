@@ -1,4 +1,4 @@
-name: Build
+name: Build native on Windows
 
 on:
   push:
@@ -13,8 +13,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        # os: [ubuntu-latest, macos-latest, windows-latest]
-        os: [ubuntu-latest]
+        os: [windows-latest]
 
     steps:
     - uses: actions/checkout@v3
@@ -30,4 +29,4 @@ jobs:
     - name: Install PlatformIO Core
       run: pip install --upgrade platformio
     - name: Build BuildTest using PlatformIO
-      run: pio run -d examples/BuildTest -e raspberry -e native -e atmelsam -e espressif32 -e espressif8266 -e heltec-cubecell -e intel_arc32 -e nordicnrf52 -e ststm32 -e teensy -e titiva
+      run: pio run -d examples/BuildTest -e native
