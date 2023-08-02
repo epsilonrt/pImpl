@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+.pio
+.vscode
+.codelite
+.version
+docs/
