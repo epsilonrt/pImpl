@@ -1,15 +1,32 @@
 # pimp
-PImpl Idiom in C++ for platformio
+pImpl Idiom in C++ for platformio
 
-When changes are made to a [header file](https://www.geeksforgeeks.org/difference-header-file-library/), all sources including it needs to be recompiled. In large projects and libraries, it can cause build time issues due to the fact that even when a small change to the implementation is made everyone has to wait some time until they compile their code. One way to solve this problem is by using the **PImpl Idiom**, which **hides the implementation in the headers and includes an interface file** that **compiles instantly**.
+When changes are made to a [header file](https://www.geeksforgeeks.org/difference-header-file-library/), all sources including it needs to be recompiled. In large projects and libraries, it can cause build time issues due to the fact that even when a small change to the implementation is made everyone has to wait some time until they compile their code. One way to solve this problem is by using the **pImpl Idiom**, which **hides the implementation in the headers and includes an interface file** that **compiles instantly**.
 
-The PImpl Idiom **(Pointer to IMPLementation)** is a technique used for separating implementation from the interface. It minimizes header exposure and helps programmers to reduce build dependencies by moving the private data members in a separate class and accessing them through an [opaque pointer](https://www.geeksforgeeks.org/opaque-pointer/).
+The pImpl Idiom **(Pointer to IMPLementation)** is a technique used for separating implementation from the interface. It minimizes header exposure and helps programmers to reduce build dependencies by moving the private data members in a separate class and accessing them through an [opaque pointer](https://www.geeksforgeeks.org/opaque-pointer/).
 
-![](https://media.geeksforgeeks.org/wp-content/uploads/20190606163517/Header-and-Implementation-file-structure-within-the-PImpl-Idiom-2.jpg)
+![](https://media.geeksforgeeks.org/wp-content/uploads/20190606163517/Header-and-Implementation-file-structure-within-the-pImpl-Idiom-2.jpg)
 
-This library provides an implementation derived from the article [PImpl Idiom in C++ with Examples](https://www.geeksforgeeks.org/pimpl-idiom-in-c-with-examples/) and uses a [std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr). 
+This library provides an implementation derived from the article [pImpl Idiom in C++ with Examples](https://www.geeksforgeeks.org/pimpl-idiom-in-c-with-examples/) and uses a [std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr). 
 
 Thus, this library **can only be used on platforms with an STL implementation** as it is the case for the [Arduino](https://www.arduino.cc/) frameworks for [ESP32](https://www.espressif.com/en/products/socs/esp32) and [ESP8266](https://www.espressif.com/en/products/socs/esp8266), [STM32](https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html), [Teensy 3 and more](https://www.pjrc.com/teensy/) (but not for [AVR](https://www.microchip.com/design-centers/8-bit/avr-mcus) based platforms) and as well as for the [mbed](https://www.mbed.com/en/) framework, and for native PC, Linux, and Mac...
+
+## List of platforms supported by pimp
+
+**Embedded**  
+* [Atmel SAM](https://docs.platformio.org/en/stable/platforms/atmelsam.html#platform-atmelsam)  
+* [Espressif 32](https://docs.platformio.org/en/stable/platforms/espressif32.html#platform-espressif32)  
+* [Espressif 8266](https://docs.platformio.org/en/stable/platforms/espressif8266.html#platform-espressif8266)  
+* [Heltec CubeCell](https://docs.platformio.org/en/stable/platforms/heltec-cubecell.html#platform-heltec-cubecell)  
+* [Intel ARC32](https://docs.platformio.org/en/stable/platforms/intel_arc32.html#platform-intel-arc32)  
+* [Nordic nRF52](https://docs.platformio.org/en/stable/platforms/nordicnrf52.html#platform-nordicnrf52)  
+* [Raspberry Pi RP2040](https://docs.platformio.org/en/stable/platforms/raspberrypi.html#platform-raspberrypi)  
+* [ST STM32](https://docs.platformio.org/en/stable/platforms/ststm32.html#platform-ststm32)  
+* [Teensy](https://docs.platformio.org/en/stable/platforms/teensy.html#platform-teensy)  (not for AVR based Teensy)
+* [TI TIVA](https://docs.platformio.org/en/stable/platforms/titiva.html#platform-titiva)
+
+**Desktop**  
+* [native](https://docs.platformio.org/en/stable/platforms/native.html  (Windows, Linux, MacOS)  
 
 ## The d-pointer
 
@@ -32,11 +49,12 @@ The spirit of this pattern is outlined in the code below (all code in this artic
  {
      // ...
      Rect geometry() const;
+     virtual ~Widget(); // virtual destructor is needed for inheritance, no default implementation to use unique_ptr! 
      // ... 
  
  private:
-     Class Private;
-     std::unique_ptr<Private> d_ptr;
+     class Private; // forward declaration of the private class
+     std::unique_ptr<Private> d_ptr; // the d-pointer for the pImpl idiom, all magic is here
  };
 ```
 
@@ -48,6 +66,7 @@ struct Widget::Private
 {
     Rect geometry;
     std::string stylesheet;
+    virtual ~Private() = default;
 };
 ```
 
@@ -59,13 +78,24 @@ struct Widget::Private
 
 Widget::Widget() : d_ptr(new Private)
 {
-    // Creation of private data
+    // Call some methods of the private class
+    // the initialization of private data is the 
+    // responsibility of the constructor of the Private class.
 }
 
 Rect Widget::geometry() const
 {
     // The d-ptr is only accessed in the library code
     return d_ptr->geometry;
+}
+
+Widget::~Widget()
+{
+    // Do what is necessary properly during the destruction, 
+    // but not the destruction of the private data because 
+    // it is the Private class which takes care of it.
+    // Typically we call here the close() method or something like that.
+    // No need to delete d_ptr, it's an unique_ptr
 }
 ```
 
@@ -80,7 +110,7 @@ class Label : public Widget
     std::string text();
 
 private:
-     Class Private;
+     class Private;
     // Each class maintains its own d-pointer
      std::unique_ptr<Private> d_ptr;
 };
@@ -133,7 +163,7 @@ class Widget
     Rect geometry() const;
     // ...
 private:
-     Class Private;
+     class Private;
      std::unique_ptr<Private> d_ptr;
 };
 ```
@@ -166,6 +196,15 @@ Rect Widget::geometry() const
     // the d-ptr is only accessed in the library code
     return d_ptr->geometry;
 }
+
+Widget::~Widget()
+{
+    // Do what is necessary properly during the destruction, 
+    // but not the destruction of the private data because 
+    // it is the Private class which takes care of it.
+    // Typically we call here the close() method or something like that.
+    // No need to delete d_ptr, it's an unique_ptr
+}
 ```
 
 Next, another class based on Widget.
@@ -179,7 +218,7 @@ class Label : public Widget
     std::string text() const;
 
 private:
-     Class Private;
+     class Private;
      std::unique_ptr<Private> d_ptr;
 };
 ```
@@ -225,7 +264,7 @@ public:
 protected:
     // only subclasses may access the below
     // allow subclasses to initialize with their own concrete Private
-    Class Private;
+    class Private;
     Widget(Private &dd);
     std::unique_ptr<Private> d_ptr;
 };
@@ -264,7 +303,7 @@ public:
     Label();
     // ...
 protected:
-    Class Private;
+    class Private;
     Label(Private &dd); // allow Label subclasses to pass on their Private
     // notice how Label does not have a d_ptr! It just uses Widget's d_ptr.
 };
@@ -374,7 +413,7 @@ public:
     Label();
     // ...
 protected:
-    Class Private;
+    class Private;
     Label(Private &dd);
 private:
     PIMP_DECLARE_PRIVATE(Label)
