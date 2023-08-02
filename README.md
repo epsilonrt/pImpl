@@ -1,6 +1,8 @@
 # pimp
 pImpl Idiom in C++ for platformio
 
+"Pointer to implementation" or "pImpl" is a C++ programming technique that removes implementation details of a class from its object representation by    placing them in a separate class, accessed through an opaque pointer. This technique is used to construct C++ library interfaces with stable ABI and to reduce compile-time dependencies.
+
 When changes are made to a [header file](https://www.geeksforgeeks.org/difference-header-file-library/), all sources including it needs to be recompiled. In large projects and libraries, it can cause build time issues due to the fact that even when a small change to the implementation is made everyone has to wait some time until they compile their code. One way to solve this problem is by using the **pImpl Idiom**, which **hides the implementation in the headers and includes an interface file** that **compiles instantly**.
 
 The pImpl Idiom **(Pointer to IMPLementation)** is a technique used for separating implementation from the interface. It minimizes header exposure and helps programmers to reduce build dependencies by moving the private data members in a separate class and accessing them through an [opaque pointer](https://www.geeksforgeeks.org/opaque-pointer/).
