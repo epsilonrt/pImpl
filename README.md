@@ -1,6 +1,15 @@
 # pimp
 pImpl Idiom in C++ for platformio
 
+[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/epsilonrt/pimp?include_prereleases)](https://github.com/epsilonrt/pimp/releases) 
+[![PlatformIO Registry](https://badges.registry.platformio.org/packages/epsilonrt/library/pimp.svg)](https://registry.platformio.org/libraries/epsilonrt/pimp) 
+[![Arduino Registry](https://www.ardu-badge.com/badge/pimp.svg)](https://www.arduinolibraries.info/libraries/pimp) 
+
+[![Arduino Build](https://github.com/epsilonrt/pimp/actions/workflows/build_arduino.yml/badge.svg)](https://github.com/epsilonrt/pimp/actions/workflows/build_arduino.yml) 
+[![Desktop Build](https://github.com/epsilonrt/pimp/actions/workflows/build_desktop.yml/badge.svg)](https://github.com/epsilonrt/pimp/actions/workflows/build_desktop.yml) 
+
+---
+
 "Pointer to implementation" or "pImpl" is a C++ programming technique that removes implementation details of a class from its object representation by    placing them in a separate class, accessed through an opaque pointer. This technique is used to construct C++ library interfaces with stable ABI and to reduce compile-time dependencies.
 
 When changes are made to a [header file](https://www.geeksforgeeks.org/difference-header-file-library/), all sources including it needs to be recompiled. In large projects and libraries, it can cause build time issues due to the fact that even when a small change to the implementation is made everyone has to wait some time until they compile their code. One way to solve this problem is by using the **pImpl Idiom**, which **hides the implementation in the headers and includes an interface file** that **compiles instantly**.
