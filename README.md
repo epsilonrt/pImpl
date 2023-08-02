@@ -39,6 +39,9 @@ class User : public PimpClass {
     int age() const;
     void setAge (int age);
     void setName (const std::string &name);
+  // the part below will always be present in derived classes, 
+  // it allows storing and accessing private member data with 
+  // the d_ptr pointer of the base class using the PIMP_D() macro.
   protected:
     class Private;
     User (Private &dd);
