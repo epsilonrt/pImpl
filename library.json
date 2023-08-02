@@ -2,7 +2,7 @@
   "name": "pimp",
   "version": "1.0.0",
   "keywords": "data",
-  "description": "PImpl Idiom in C++",
+  "description": "pImpl Idiom in C++",
   "authors":
   [
     {
