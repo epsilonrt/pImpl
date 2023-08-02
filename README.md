@@ -16,14 +16,14 @@ This is a C++ programming technique that removes implementation details of a cla
 
 <!-- ![](extras/images/pimp/pimp.svg) -->
 <p align="center">
-  <img src="extras/images/pimp/pimp.svg" />
+  <img src="https://raw.githubusercontent.com/epsilonrt/pimp/main/extras/images/pimp/pimp.svg" />
 </p>
 
 As can be seen in the diagram above, the **User** class has a single data member, **d_ptr** which is a pointer to the implementing class **User::Private**. The **User::Private** class is defined in the **user_p.h** file and is used only in the **user.cpp** file. The **User** class is defined in the **user.h** file and will constitute the API of the **User** class. The user of the **User** class does not need to know the definition of the **User::Private** class. It will use the public methods of the **User** class to access the private member data of the **User::Private** class (name() and setName() allow access to the private data **name* * for example).
 
 The **pimp lib** is very strongly inspired by the implementation of the [Qt](https://www.qt.io/) library which uses a **d** pointer to the private class (implemantation) and a **q** pointer to the public class (API). The explanations below are taken from the [D-Pointer](https://wiki.qt.io/D-Pointer) page of the Qt wiki. The explanations are in the context of the Qt library but they are also valid for the **pimp lib** and may be read to own [wiki page](https://github.com/epsilonrt/pimp/wiki/The-d%E2%80%90pointer) in the context of the **pimp lib**.
 
-The **pimp lib** provide a [PimpClass](https://epsilonrt.github.io/class_pimp_class.html) that can be used as a base class for any class that needs to use the pImpl idiom. The private implementation class must be defined in the source file of the class that uses it or in a private header file (with _p suffix for example). [PimpClass::Private](https://epsilonrt.github.io/struct_pimp_class_1_1_private.html) is a friend of the class that uses it. Then, **pimp lib** provide a set of macros that can be used to hide the private implementation class and the private implementation pointer.
+The **pimp lib** provide a [PimpClass](https://epsilonrt.github.io/pimp/class_pimp_class.html) that can be used as a base class for any class that needs to use the pImpl idiom. The private implementation class must be defined in the source file of the class that uses it or in a private header file (with _p suffix for example). [PimpClass::Private](https://epsilonrt.github.io/pimp/struct_pimp_class_1_1_private.html) is a friend of the class that uses it. Then, **pimp lib** provide a set of macros that can be used to hide the private implementation class and the private implementation pointer.
 
 Thus, the complete example of the **User** class using the **pimp lib** is as follows:
 
@@ -83,22 +83,27 @@ void User::setName (const std::string &name) {
   d->name = name;
 }
 
-User::User() : PimpClass (*new Private (this)) {
-}
+// Default constructor
+User::User() : PimpClass (*new Private (this)) {}
 
-User::User (Private &dd) : PimpClass (dd) {
-}
-
-User::Private::Private (User *q) : PimpClass::Private (q), age (0) {}
-
+// Constructor with parameters
 User::User (const std::string &name, int age) : User() {
   PIMP_D (User);
   d->name = name;
   d->age = age;
 }
+
+// Protected constructor for derived classes
+User::User (Private &dd) : PimpClass (dd) {}
+
+// Private implementation class
+User::Private::Private (User *q) : PimpClass::Private (q), age (0) {}
 ```
+
+That corresponds to the following diagram:
+
 <p align="center">
-  <img src="extras/images/pimp_real/pimp_real.svg" />
+  <img src="https://raw.githubusercontent.com/epsilonrt/pimp/main/extras/images/pimp_real/pimp_real.svg" />
 </p>
 
 > The **pimp lib** uses [std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr), thus, this library **can only be used on platforms with a STL implementation** (see the list below).
