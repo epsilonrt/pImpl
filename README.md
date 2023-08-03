@@ -6,7 +6,9 @@ pImpl Idiom in C++
 [![Arduino Registry](https://www.ardu-badge.com/badge/pimp.svg)](https://www.arduinolibraries.info/libraries/pimp) 
 
 [![Desktop Build](https://github.com/epsilonrt/pimp/actions/workflows/build_desktop.yml/badge.svg)](https://github.com/epsilonrt/pimp/actions/workflows/build_desktop.yml)
-[![Arduino Build](https://github.com/epsilonrt/pimp/actions/workflows/build_arduino.yml/badge.svg)](https://github.com/epsilonrt/pimp/actions/workflows/build_arduino.yml) 
+[![Arduino Build](https://github.com/epsilonrt/pimp/actions/workflows/build_arduino.yml/badge.svg)](https://github.com/epsilonrt/pimp/actions/workflows/build_arduino.yml)
+[![Unit Test](https://github.com/epsilonrt/pimp/actions/workflows/unit_test.yml/badge.svg)](https://github.com/epsilonrt/pimp/actions/workflows/unit_test.yml)
+
 
 ---
 
