@@ -1,4 +1,4 @@
-name: Embedded Build
+name: Arduino Build
 
 on:
   push:
@@ -29,4 +29,4 @@ jobs:
     - name: Install PlatformIO Core
       run: pip install --upgrade platformio
     - name: Build BuildTest using PlatformIO
-      run: pio run -d examples/BuildTest -e atmelsam -e espressif32 -e espressif8266 -e heltec-cubecell -e intel_arc32 -e nordicnrf52 -e ststm32 -e teensy -e titiva
+      run: pio run -d examples/PimpUserPlatformIOArduino -e atmelsam -e espressif32 -e espressif8266 -e heltec-cubecell -e intel_arc32 -e nordicnrf52 -e ststm32 -e teensy -e titiva
