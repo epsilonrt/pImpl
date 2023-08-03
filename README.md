@@ -19,7 +19,7 @@ This is a C++ programming technique that removes implementation details of a cla
   <img src="https://raw.githubusercontent.com/epsilonrt/pimp/main/extras/images/pimp/pimp.svg" />
 </p>
 
-As can be seen in the diagram above, the **User** class has a single data member, **d_ptr** which is a pointer to the implementing class **User::Private**. The **User::Private** class is defined in the **user_p.h** file and is used only in the **user.cpp** file. The **User** class is defined in the **user.h** file and will constitute the API of the **User** class. The user of the **User** class does not need to know the definition of the **User::Private** class. It will use the public methods of the **User** class to access the private member data of the **User::Private** class (name() and setName() allow access to the private data **name* * for example).
+As can be seen in the diagram above, the **User** class has a single data member, **d_ptr** which is a pointer to the implementing class **User::Private**. The **User::Private** class is defined in the **user_p.h** file and is used only in the **user.cpp** file. The **User** class is defined in the **user.h** file and will constitute the API of the **User** class. The user of the **User** class does not need to know the definition of the **User::Private** class. It will use the public methods of the **User** class to access the private member data of the **User::Private** class (name() and setName() allow access to the private data **name** for example).
 
 The **pimp lib** is very strongly inspired by the implementation of the [Qt](https://www.qt.io/) library which uses a **d** pointer to the private class (implemantation) and a **q** pointer to the public class (API). The explanations below are taken from the [D-Pointer](https://wiki.qt.io/D-Pointer) page of the Qt wiki. The explanations are in the context of the Qt library but they are also valid for the **pimp lib** and may be read to own [wiki page](https://github.com/epsilonrt/pimp/wiki/The-d%E2%80%90pointer) in the context of the **pimp lib**.
 
@@ -31,63 +31,73 @@ Thus, the complete example of the **User** class using the **pimp lib** is as fo
 ```cpp
 #include <pimp.h>
 
+// User class is a PimpClass with a private implementation.
 class User : public PimpClass {
   public:
+    // Public API
+    // ----------------------------------------
+    // Default constructor
     User();
+    // Constructor with parameters
     User (const std::string &name, int age);
+    // Returns the name
     std::string name() const;
+    // Returns the age
     int age() const;
+    // Sets the age
     void setAge (int age);
+    // Sets the name
     void setName (const std::string &name);
-  // the part below will always be present in derived classes, 
-  // it allows storing and accessing private member data with 
-  // the d_ptr pointer of the base class using the PIMP_D() macro.
+
+    // the part below will always be present in derived classes, 
+    // it allows storing and accessing private member data with 
+    // the d_ptr pointer of the base class using the PIMP_D() macro.
   protected:
+    // Constructor with private implementation
     class Private;
+    // This constructor must be used by derived classes
     User (Private &dd);
   private:
+    // Declare d_func() macro for private implementation access
     PIMP_DECLARE_PRIVATE (User)
 };
 ```
 
 **user_p.h**, the private implementation class of the **User** class:
 ```cpp
+#include <pimp_p.h>
 #include "user.h"
+
+// Private implementation of User class
+// This class is not exported and is only used by User class
+// It is derived from PimpClass::Private to allow access to the API class with PIMP_Q() macro
 class User::Private : public PimpClass::Private {
   public:
+    // Constructor call by User class for creating the private implementation
+    Private (User *q);
+    // Private attributes
     std::string name;
     int age;
-    Private (User *q);
+    // Declare q_func() macro for API class access
     PIMP_DECLARE_PUBLIC (User)
-};
-```
+};```
 
 **user.cpp**, the source file of the **User** class:
 ```cpp
 #include "user_p.h"
 
-std::string User::name() const {
-  PIMP_D (const User);
-  return d->name;
-}
-
-int User::age() const {
-  PIMP_D (const User);
-  return d->age;
-}
-
-void User::setAge (int age) {
-  PIMP_D (User);
-  d->age = age;
-}
-
-void User::setName (const std::string &name) {
-  PIMP_D (User);
-  d->name = name;
-}
+// ----------------------------------------------------------------------------
+// User class implementation
+// ----------------------------------------------------------------------------
 
 // Default constructor
-User::User() : PimpClass (*new Private (this)) {}
+// Call the protected constructor with private implementation
+User::User() : PimpClass (*new Private (this)) {
+}
+
+// Protected constructor with private implementation
+User::User (Private &dd) : PimpClass (dd) {
+}
 
 // Constructor with parameters
 User::User (const std::string &name, int age) : User() {
@@ -95,11 +105,40 @@ User::User (const std::string &name, int age) : User() {
   d->name = name;
   d->age = age;
 }
+// ----------------------------------------------------------------------------
+// Public API
+// ----------------------------------------------------------------------------
 
-// Protected constructor for derived classes
-User::User (Private &dd) : PimpClass (dd) {}
+// Returns the name
+std::string User::name() const {
+  PIMP_D (const User);
+  return d->name;
+}
 
-// Private implementation class
+// Returns the age
+int User::age() const {
+  PIMP_D (const User);
+  return d->age;
+}
+
+// Sets the age
+void User::setAge (int age) {
+  PIMP_D (User);
+  d->age = age;
+}
+
+// Sets the name
+void User::setName (const std::string &name) {
+  PIMP_D (User);
+  d->name = name;
+}
+
+// ----------------------------------------------------------------------------
+// User::Private implementation
+// ----------------------------------------------------------------------------
+
+// Constructor that is called by User class for creating the private implementation
+// Initializes the private attributes
 User::Private::Private (User *q) : PimpClass::Private (q), age (0) {}
 ```
 
