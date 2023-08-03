@@ -80,7 +80,8 @@ class User::Private : public PimpClass::Private {
     int age;
     // Declare q_func() macro for API class access
     PIMP_DECLARE_PUBLIC (User)
-};```
+};
+```
 
 **user.cpp**, the source file of the **User** class:
 ```cpp
