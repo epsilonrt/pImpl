@@ -1,0 +1,26 @@
+name: CMake Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v3.5.3
+
+    - name: Configure the project
+      uses: threeal/cmake-action@v1.2.0
+
+    - name: Build the project
+      runs: cmake --build build
