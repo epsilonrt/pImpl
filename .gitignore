@@ -36,3 +36,5 @@
 .codelite
 .version
 docs/
+build/
+src/build/
