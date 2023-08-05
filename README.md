@@ -7,6 +7,7 @@ pImpl Idiom in C++
 
 [![Desktop Build](https://github.com/epsilonrt/pimp/actions/workflows/build_desktop.yml/badge.svg)](https://github.com/epsilonrt/pimp/actions/workflows/build_desktop.yml)
 [![Arduino Build](https://github.com/epsilonrt/pimp/actions/workflows/build_arduino.yml/badge.svg)](https://github.com/epsilonrt/pimp/actions/workflows/build_arduino.yml)
+[![CMake Build](https://github.com/epsilonrt/pimp/actions/workflows/build_cmake.yml/badge.svg)](https://github.com/epsilonrt/pimp/actions/workflows/build_cmake.yml)
 [![Unit Test](https://github.com/epsilonrt/pimp/actions/workflows/unit_test.yml/badge.svg)](https://github.com/epsilonrt/pimp/actions/workflows/unit_test.yml)
 
 
