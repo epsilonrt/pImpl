@@ -23,6 +23,8 @@ This is a C++ programming technique that removes implementation details of a cla
 
 As can be seen in the diagram above, the **User** class has a single data member, **d_ptr** which is a pointer to the implementing class **User::Private**. The **User::Private** class is defined in the **user_p.h** file and is used only in the **user.cpp** file. The **User** class is defined in the **user.h** file and will constitute the API of the **User** class. The user of the **User** class does not need to know the definition of the **User::Private** class. It will use the public methods of the **User** class to access the private member data of the **User::Private** class (name() and setName() allow access to the private data **name** for example).
 
+The pimp library allows a **library developer** to use the _pImpl Idiom_ easily, it provides a base [API class](https://epsilonrt.github.io/pimp/class_pimp_class.html), a base [Private class](https://epsilonrt.github.io/pimp/struct_pimp_class_1_1_private.html), and a set of macros, similar to those used by [Qt](https://wiki.qt.io/D-Pointer).
+
 The **pimp lib** is very strongly inspired by the implementation of the [Qt](https://www.qt.io/) library which uses a **d** pointer to the private class (implemantation) and a **q** pointer to the public class (API). The explanations below are taken from the [D-Pointer](https://wiki.qt.io/D-Pointer) page of the Qt wiki. The explanations are in the context of the Qt library but they are also valid for the **pimp lib** and may be read to own [wiki page](https://github.com/epsilonrt/pimp/wiki/The-d%E2%80%90pointer) in the context of the **pimp lib**.
 
 The **pimp lib** provide a [PimpClass](https://epsilonrt.github.io/pimp/class_pimp_class.html) that can be used as a base class for any class that needs to use the pImpl idiom. The private implementation class must be defined in the source file of the class that uses it or in a private header file (with _p suffix for example). [PimpClass::Private](https://epsilonrt.github.io/pimp/struct_pimp_class_1_1_private.html) is a friend of the class that uses it. Then, **pimp lib** provide a set of macros that can be used to hide the private implementation class and the private implementation pointer.
@@ -151,9 +153,61 @@ That corresponds to the following diagram:
   <img src="https://raw.githubusercontent.com/epsilonrt/pimp/main/extras/images/pimp_real/pimp_real.svg" />
 </p>
 
-> The **pimp lib** uses [std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr), thus, this library **can only be used on platforms with a STL implementation** (see the list below).
+An example of use of the **User** class is as follows (for Native platforms with io streams):
+**[examples/PimpUserPlatformIONative](https://github.com/epsilonrt/pimp/tree/main/examples/PimpUserPlatformIONative)**
+```cpp
+#include <iostream>
+#include "user.h"
 
-**List of platforms supported by pimp**
+User user ("John Doe", 42);
+
+int main() {
+  // check if the private implementation has access to the API class
+  std::cout << "Parent Access: " << (user.checkParentAccess() ? "Ok" : "Failed!") << std::endl;
+  // print the user name and age
+  std::cout << "User name: " <<  user.name() << std::endl;
+  std::cout << "User age: " <<  user.age() << std::endl;
+  // change the user name and age
+  user.setName ("Pascal JEAN, aka epsilonRT");
+  user.setAge (57);
+  // print the user name and age
+  std::cout << "User name: " <<  user.name() << std::endl;
+  std::cout << "User age: " <<  user.age() << std::endl;
+  return 0;
+}
+```
+
+and for Arduino platforms:  
+**[examples/PimpUserPlatformIOArduino](https://github.com/epsilonrt/pimp/tree/main/examples/PimpUserPlatformIOArduino)**
+
+```cpp
+#include "user.h"
+
+// Create an instance of User class
+User user ("John Doe", 42);
+
+void setup() {
+  Serial.begin (115200);
+  // check if the private implementation has access to the API class
+  Serial.println ("\nParent Access: " + String (user.checkParentAccess() ? "Ok" : "Failed!"));
+  // print the user name and age
+  Serial.println ("User name: " + user.name());
+  Serial.println ("User age: " + String (user.age()));
+  // change the user name and age
+  user.setName ("Pascal JEAN, aka epsilonRT");
+  user.setAge (57);
+  // print the user name and age
+  Serial.println ("User name: " + user.name());
+  Serial.println ("User age: " + String (user.age()));
+}
+
+void loop() {
+}
+```
+
+## supported platforms
+
+> The **pimp lib** uses [std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr), thus, this library **can only be used on platforms with a STL implementation** (see the list below):
 
 **Embedded**  
 * [Atmel SAM](https://docs.platformio.org/en/stable/platforms/atmelsam.html#platform-atmelsam)  
