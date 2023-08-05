@@ -1,6 +1,6 @@
 {
   "name": "pimp",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "keywords": "pimpl,pointer,implementation,idiom,d-ptr",
   "description": "pImpl Idiom in C++",
   "authors":
