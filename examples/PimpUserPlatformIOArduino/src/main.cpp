@@ -14,7 +14,7 @@ User user ("John Doe", 42);
 
 void setup() {
   Serial.begin (115200);
-  while (!Serial);
+  delay (2000);
   // check if the private implementation has access to the API class
   Serial.println ("\nParent Access: " + String (user.checkParentAccess() ? "Ok" : "Failed!"));
   // print the user name and age
