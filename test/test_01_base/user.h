@@ -1,10 +1,10 @@
-// PimpUser example - User class header
+// PimplUser example - User class header
 // Created by Pascal JEAN aka epsilonRT, August 2023
-// This example shows how to use the PimpUser class
+// This example shows how to use the PimplUser class
 // This example is compatible with PlatformIO for native platform, and is in the public domain
 
 #pragma once
-#include <pimp.h>
+#include <pImpl.h>
 #ifdef ARDUINO
 #include <Arduino.h>
 typedef String string_t;
@@ -14,8 +14,8 @@ typedef std::string string_t;
 #endif
 
 // ----------------------------------------------------------------------------
-// User class is a PimpClass with a private implementation.
-class User : public PimpClass {
+// User class is a PimplClass with a private implementation.
+class User : public PimplClass {
   public:
     // Default constructor
     User();
@@ -38,7 +38,7 @@ class User : public PimpClass {
     User (Private &dd);
   protected:
     // Declare d_func() macro for private implementation access
-    PIMP_DECLARE_PRIVATE (User)
+    PIMPL_DECLARE_PRIVATE (User)
 };
 
 // ----------------------------------------------------------------------------
@@ -60,5 +60,5 @@ class DerivedUser : public User {
     DerivedUser (Private &dd);
   private:
     // Declare d_func() macro for private implementation access
-    PIMP_DECLARE_PRIVATE (DerivedUser)
+    PIMPL_DECLARE_PRIVATE (DerivedUser)
 };

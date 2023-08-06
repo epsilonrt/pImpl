@@ -5,15 +5,15 @@
    SPDX-License-Identifier: BSD-3-Clause
 */
 #pragma once
-#include "pimp.h"
+#include "pImpl.h"
 
 /**
- * @brief The PimpClass::Private class
+ * @brief The PimplClass::Private class
  * 
- * This class is the private class of the PimpClass class, it is used to hide the implementation of the PimpClass class.
- * Only the PimpClass class and childrens can access it.
+ * This class is the private class of the PimplClass class, it is used to hide the implementation of the PimplClass class.
+ * Only the PimplClass class and childrens can access it.
  */
-struct PimpClass::Private {
+struct PimplClass::Private {
     /**
      * @brief Construct a new Private object
      * 
@@ -21,7 +21,7 @@ struct PimpClass::Private {
      * 
      * @param q pointer to the API class
      */
-    Private (PimpClass *q) : q_ptr (q) {}
+    Private (PimplClass *q) : q_ptr (q) {}
     
     /**
      * @brief Destroy the Private object
@@ -33,5 +33,5 @@ struct PimpClass::Private {
     /**
      * @brief q-ptr that points to the API class
      */
-    PimpClass *const q_ptr;
+    PimplClass *const q_ptr;
 };

@@ -4,10 +4,10 @@
 			"path": "."
 		},
 		{
-			"path": "examples/PimpUserPlatformIOArduino"
+			"path": "examples/PimplUserPlatformIOArduino"
 		},
 		{
-			"path": "examples/PimpUserPlatformIONative"
+			"path": "examples/PimplUserPlatformIONative"
 		},
 		{
 			"path": "test/test_01_base"

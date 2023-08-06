@@ -1,7 +1,7 @@
 {
-  "name": "pimp",
-  "version": "1.0.4",
-  "keywords": "pimpl,pointer,implementation,idiom,d-ptr",
+  "name": "pImpl",
+  "version": "1.0.5",
+  "keywords": "pImpl,pointer,implementation,idiom,d-ptr",
   "description": "pImpl Idiom in C++",
   "authors":
   [
@@ -14,7 +14,7 @@
   "repository":
   {
     "type": "git",
-    "url": "https://github.com/epsilonrt/pimp.git"
+    "url": "https://github.com/epsilonrt/pImpl.git"
   },
   "license": "BSD-3-Clause",
   "examples":[

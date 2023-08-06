@@ -1,7 +1,7 @@
 
-// PimpUser example
+// PimplUser example for PlatformIO, Arduino platform
 // Created by Pascal JEAN aka epsilonRT, August 2023
-// This example shows how to use the PimpUser class
+// This example shows how to use the PimplUser class
 // See user.h, user_p.h and user.cpp for more details
 // This example is compatible with Arduino, and is in the public domain
 
@@ -14,7 +14,7 @@ User user ("John Doe", 42);
 
 void setup() {
   Serial.begin (115200);
-  while (!Serial);
+  delay (2000);
   // check if the private implementation has access to the API class
   Serial.println ("\nParent Access: " + String (user.checkParentAccess() ? "Ok" : "Failed!"));
   // print the user name and age

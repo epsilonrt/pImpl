@@ -4,10 +4,10 @@
 
    SPDX-License-Identifier: BSD-3-Clause
 */
-#include "pimp_p.h"
+#include "pImpl_p.h"
 
 // protected constructor
-PimpClass::PimpClass (Private &dd) : d_ptr (&dd) {}
+PimplClass::PimplClass (Private &dd) : d_ptr (&dd) {}
 
 // default destructor
-PimpClass::~PimpClass() {}
+PimplClass::~PimplClass() {}

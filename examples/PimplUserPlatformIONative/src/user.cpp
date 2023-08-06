@@ -1,6 +1,6 @@
-// PimpUser example - User class implementation
+// PimplUser example - User class implementation
 // Created by Pascal JEAN aka epsilonRT, August 2023
-// This example shows how to use the PimpUser class
+// This example shows how to use the PimplUser class
 // This example is compatible with PlatformIO for native platform, and is in the public domain
 
 #include "user_p.h"
@@ -11,11 +11,11 @@
 
 // Constructor that is called by User class for creating the private implementation
 // Initializes the private attributes
-User::Private::Private (User *q) : PimpClass::Private (q), age (0) {}
+User::Private::Private (User *q) : PimplClass::Private (q), age (0) {}
 
 // Checks the parent access from the private implementation
 bool User::Private::checkParentAccess() const {
-  PIMP_Q (const User);
+  PIMPL_Q (const User);
   return q->name() == name && q->age() == age;
 }
 
@@ -25,16 +25,16 @@ bool User::Private::checkParentAccess() const {
 
 // Default constructor
 // Call the protected constructor with private implementation
-User::User() : PimpClass (*new Private (this)) {
+User::User() : PimplClass (*new Private (this)) {
 }
 
 // Protected constructor with private implementation
-User::User (Private &dd) : PimpClass (dd) {
+User::User (Private &dd) : PimplClass (dd) {
 }
 
 // Constructor with parameters
 User::User (const std::string &name, int age) : User() {
-  PIMP_D (User);
+  PIMPL_D (User);
   d->name = name;
   d->age = age;
 }
@@ -45,32 +45,32 @@ User::User (const std::string &name, int age) : User() {
 
 // Returns the name
 std::string User::name() const {
-  PIMP_D (const User);
+  PIMPL_D (const User);
   return d->name;
 }
 
 // Returns the age
 int User::age() const {
-  PIMP_D (const User);
+  PIMPL_D (const User);
   return d->age;
 }
 
 // Sets the age
 void User::setAge (int age) {
-  PIMP_D (User);
+  PIMPL_D (User);
   d->age = age;
 }
 
 // Sets the name
 void User::setName (const std::string &name) {
-  PIMP_D (User);
+  PIMPL_D (User);
   d->name = name;
 }
 
 // Checks the parent access from the private implementation
 // for testing purpose
-// call the private implementation method passing by the PIMP_D(const User) macro
+// call the private implementation method passing by the PIMPL_D(const User) macro
 bool User::checkParentAccess() const {
-  PIMP_D (const User);
+  PIMPL_D (const User);
   return d->checkParentAccess();
 }

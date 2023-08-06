@@ -1,5 +1,5 @@
 //
-// Unit Test for the class PimpClass
+// Unit Test for the class PimplClass
 //
 #include <unity.h>
 #include <string.h>

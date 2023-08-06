@@ -1,6 +1,6 @@
-// PimpUser example for PlatformIO, Native platform
+// PimplUser example for PlatformIO, Native platform
 // Created by Pascal JEAN aka epsilonRT, August 2023
-// This example shows how to use the PimpUser class
+// This example shows how to use the PimplUser class
 // See user.h, user_p.h and user.cpp for more details
 // This example is in the public domain
 
