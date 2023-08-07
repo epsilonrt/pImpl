@@ -32,3 +32,5 @@ jobs:
       run: pip install --upgrade platformio
     - name: Build PimplUserPlatformIONative using PlatformIO
       run: pio run -d examples/PimplUserPlatformIONative
+    - name: Build PimplSingletonPlatformIONative using PlatformIO
+      run: pio run -d examples/PimplSingletonPlatformIONative

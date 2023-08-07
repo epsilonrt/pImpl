@@ -21,7 +21,8 @@ DerivedUser duser ("Pascal JEAN, aka epsilonRT", 57, "Somewhere in France");
 
 void setup() {
   Serial.begin (115200);
-  delay (2000);
+  // delay (2000);
+  while(!Serial);
 
   // check if the private implementation has access to the API class
   Serial.println ("\nParent Access: " + String (duser.checkParentAccess() ? "Ok" : "Failed!"));

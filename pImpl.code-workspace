@@ -13,6 +13,9 @@
       "path": "examples/PimplSingletonPlatformIONative"
     },
     {
+      "path": "examples/PimplSingletonPlatformIOArduino"
+    },
+    {
       "path": "test/test_01_base"
     },
     {

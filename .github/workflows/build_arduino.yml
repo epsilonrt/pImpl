@@ -30,3 +30,6 @@ jobs:
       run: pip install --upgrade platformio
     - name: Build PimplUserPlatformIOArduino using PlatformIO
       run: pio run -d examples/PimplUserPlatformIOArduino -e atmelsam -e espressif32 -e espressif8266 -e heltec-cubecell -e intel_arc32 -e nordicnrf52 -e ststm32 -e teensy -e titiva
+    - name: Build PimplSingletonPlatformIOArduino using PlatformIO
+      # -e heltec-cubecell failed
+      run: pio run -d examples/PimplSingletonPlatformIOArduino -e atmelsam -e espressif32 -e espressif8266 -e heltec-cubecell failed -e intel_arc32 -e nordicnrf52 -e ststm32 -e teensy -e titiva
