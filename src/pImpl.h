@@ -6,6 +6,7 @@
 */
 #pragma once
 #include <memory>
+#include "./singleton.h"
 
 #ifndef DOXYGEN
 #define PIMPL_D(Class) Class::Private * const d = d_func()

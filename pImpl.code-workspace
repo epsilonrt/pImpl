@@ -1,18 +1,24 @@
 {
 	"folders": [
-		{
-			"path": "."
-		},
-		{
-			"path": "examples/PimplUserPlatformIOArduino"
-		},
-		{
-			"path": "examples/PimplUserPlatformIONative"
-		},
-		{
-			"path": "test/test_01_base"
-		}
-	],
+    {
+      "path": "."
+    },
+    {
+      "path": "examples/PimplUserPlatformIOArduino"
+    },
+    {
+      "path": "examples/PimplUserPlatformIONative"
+    },
+    {
+      "path": "examples/PimplSingletonPlatformIONative"
+    },
+    {
+      "path": "test/test_01_base"
+    },
+    {
+      "path": "test/test_02_singleton"
+    }
+  ],
   "settings": {
     "files.associations": {
       "random": "cpp",
