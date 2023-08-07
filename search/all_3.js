@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['_7epimplclass_5',['~PimplClass',['../class_pimpl_class.html#a708411678fbee163c7ce6bb972e4bda4',1,'PimplClass']]],
-  ['_7eprivate_6',['~Private',['../struct_pimpl_class_1_1_private.html#afca746343b5daafa3a515961ae06f7e6',1,'PimplClass::Private']]]
+  ['pimpl_3',['pImpl',['../index.html',1,'']]],
+  ['pimplclass_4',['PimplClass',['../class_pimpl_class.html',1,'PimplClass'],['../class_pimpl_class.html#a9456457332b2e82867a4727a5bec9c06',1,'PimplClass::PimplClass(Private &amp;dd)']]],
+  ['private_5',['Private',['../struct_pimpl_class_1_1_private.html',1,'PimplClass::Private'],['../struct_pimpl_class_1_1_private.html#a86dfa231ccf3432a8edbf4f49a6a850a',1,'PimplClass::Private::Private()']]]
 ];

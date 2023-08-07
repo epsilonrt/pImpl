@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['_7epimplclass_11',['~PimplClass',['../class_pimpl_class.html#a708411678fbee163c7ce6bb972e4bda4',1,'PimplClass']]],
-  ['_7eprivate_12',['~Private',['../struct_pimpl_class_1_1_private.html#afca746343b5daafa3a515961ae06f7e6',1,'PimplClass::Private']]]
+  ['operator_3d_14',['operator=',['../class_singleton.html#a95170232f32d9e779eb5c6e45e4702d9',1,'Singleton']]]
 ];
