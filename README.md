@@ -3,7 +3,7 @@ Pointer to Implemantation Idiom in C++
 
 [![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/epsilonrt/pImpl?include_prereleases)](https://github.com/epsilonrt/pImpl/releases) 
 [![PlatformIO Registry](https://badges.registry.platformio.org/packages/epsilonrt/library/pImpl.svg)](https://registry.platformio.org/libraries/epsilonrt/pImpl) 
-[![Arduino Registry](https://www.ardu-badge.com/badge/pImpl.svg)](https://www.arduinolibraries.info/libraries/pImpl) 
+[![Arduino Registry](https://www.ardu-badge.com/badge/pImpl.svg)](https://www.arduinolibraries.info/libraries/p-impl) 
 
 [![Desktop Build](https://github.com/epsilonrt/pImpl/actions/workflows/build_desktop.yml/badge.svg)](https://github.com/epsilonrt/pImpl/actions/workflows/build_desktop.yml)
 [![Arduino Build](https://github.com/epsilonrt/pImpl/actions/workflows/build_arduino.yml/badge.svg)](https://github.com/epsilonrt/pImpl/actions/workflows/build_arduino.yml)
