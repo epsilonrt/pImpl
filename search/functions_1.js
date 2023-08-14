@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['operator_3d_14',['operator=',['../class_singleton.html#a95170232f32d9e779eb5c6e45e4702d9',1,'Singleton']]]
+  ['instance_16',['instance',['../class_singleton.html#ad486cf51d0a40bec83b6a5ee40b7857c',1,'Singleton']]],
+  ['isnull_17',['isNull',['../class_pimpl_class.html#a332848ef060a7520d2bbed0a12257275',1,'PimplClass']]]
 ];

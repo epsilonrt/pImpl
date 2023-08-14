@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['instance_1',['instance',['../class_singleton.html#ad486cf51d0a40bec83b6a5ee40b7857c',1,'Singleton']]]
+  ['d_5fptr_1',['d_ptr',['../class_pimpl_class.html#af72d12bb22b1440a2618605b7b514327',1,'PimplClass']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['singleton_17',['Singleton',['../class_singleton.html#a23b2407170cc04f6746874704b928044',1,'Singleton::Singleton(const Singleton &amp;)=delete'],['../class_singleton.html#a923b995920da9c06590adb170ab2f890',1,'Singleton::Singleton()']]]
+  ['pimplclass_19',['PimplClass',['../class_pimpl_class.html#a9456457332b2e82867a4727a5bec9c06',1,'PimplClass']]],
+  ['private_20',['Private',['../struct_pimpl_class_1_1_private.html#a86dfa231ccf3432a8edbf4f49a6a850a',1,'PimplClass::Private']]]
 ];

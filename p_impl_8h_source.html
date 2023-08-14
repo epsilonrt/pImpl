@@ -116,29 +116,35 @@ $(document).ready(function(){initNavTree('p_impl_8h_source.html',''); initResiza
 <div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="class_pimpl_class.html">   39</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_pimpl_class.html">PimplClass</a> {</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_pimpl_class.html#a708411678fbee163c7ce6bb972e4bda4">   48</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_pimpl_class.html#a708411678fbee163c7ce6bb972e4bda4">~PimplClass</a> ();</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">class </span><a class="code" href="struct_pimpl_class_1_1_private.html">Private</a>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="class_pimpl_class.html#a9456457332b2e82867a4727a5bec9c06">   67</a></span>&#160;    <a class="code" href="class_pimpl_class.html#a9456457332b2e82867a4727a5bec9c06">PimplClass</a> (<a class="code" href="struct_pimpl_class_1_1_private.html">Private</a> &amp;dd);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="class_pimpl_class.html#af72d12bb22b1440a2618605b7b514327">   76</a></span>&#160;    std::unique_ptr&lt;Private&gt; <a class="code" href="class_pimpl_class.html#af72d12bb22b1440a2618605b7b514327">d_ptr</a>;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;};</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#ifdef DOXYGEN</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#define PIMPL_D(Class)</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="class_pimpl_class.html#a332848ef060a7520d2bbed0a12257275">   57</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_pimpl_class.html#a332848ef060a7520d2bbed0a12257275">isNull</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="class_pimpl_class.html#a3e41bf7f1ecb4ece9e6eb94447ea5970">   66</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_pimpl_class.html#a3e41bf7f1ecb4ece9e6eb94447ea5970">clear</a>();</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">class </span><a class="code" href="struct_pimpl_class_1_1_private.html">Private</a>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="class_pimpl_class.html#a9456457332b2e82867a4727a5bec9c06">   85</a></span>&#160;    <a class="code" href="class_pimpl_class.html#a9456457332b2e82867a4727a5bec9c06">PimplClass</a> (<a class="code" href="struct_pimpl_class_1_1_private.html">Private</a> &amp;dd);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="class_pimpl_class.html#af72d12bb22b1440a2618605b7b514327">   94</a></span>&#160;    std::unique_ptr&lt;Private&gt; <a class="code" href="class_pimpl_class.html#af72d12bb22b1440a2618605b7b514327">d_ptr</a>;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;};</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="preprocessor">#define PIMPL_Q(Class)</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#define PIMPL_DECLARE_PRIVATE(Class)</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="preprocessor">#define PIMPL_DECLARE_PUBLIC(Class)</span></div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#ifdef DOXYGEN</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="preprocessor">#define PIMPL_D(Class)</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="preprocessor">#define PIMPL_Q(Class)</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="preprocessor">#define PIMPL_DECLARE_PRIVATE(Class)</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="preprocessor">#define PIMPL_DECLARE_PUBLIC(Class)</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
 <div class="ttc" id="aclass_pimpl_class_html"><div class="ttname"><a href="class_pimpl_class.html">PimplClass</a></div><div class="ttdoc">PimplClass.</div><div class="ttdef"><b>Definition:</b> <a href="p_impl_8h_source.html#l00039">pImpl.h:39</a></div></div>
+<div class="ttc" id="aclass_pimpl_class_html_a332848ef060a7520d2bbed0a12257275"><div class="ttname"><a href="class_pimpl_class.html#a332848ef060a7520d2bbed0a12257275">PimplClass::isNull</a></div><div class="ttdeci">bool isNull() const</div><div class="ttdoc">Check if the private class is null.</div></div>
+<div class="ttc" id="aclass_pimpl_class_html_a3e41bf7f1ecb4ece9e6eb94447ea5970"><div class="ttname"><a href="class_pimpl_class.html#a3e41bf7f1ecb4ece9e6eb94447ea5970">PimplClass::clear</a></div><div class="ttdeci">virtual void clear()</div><div class="ttdoc">Clear the private class.</div></div>
 <div class="ttc" id="aclass_pimpl_class_html_a708411678fbee163c7ce6bb972e4bda4"><div class="ttname"><a href="class_pimpl_class.html#a708411678fbee163c7ce6bb972e4bda4">PimplClass::~PimplClass</a></div><div class="ttdeci">virtual ~PimplClass()</div><div class="ttdoc">Destroy the PimplClass object.</div></div>
 <div class="ttc" id="aclass_pimpl_class_html_a9456457332b2e82867a4727a5bec9c06"><div class="ttname"><a href="class_pimpl_class.html#a9456457332b2e82867a4727a5bec9c06">PimplClass::PimplClass</a></div><div class="ttdeci">PimplClass(Private &amp;dd)</div><div class="ttdoc">Construct a new PimplClass object.</div></div>
-<div class="ttc" id="aclass_pimpl_class_html_af72d12bb22b1440a2618605b7b514327"><div class="ttname"><a href="class_pimpl_class.html#af72d12bb22b1440a2618605b7b514327">PimplClass::d_ptr</a></div><div class="ttdeci">std::unique_ptr&lt; Private &gt; d_ptr</div><div class="ttdoc">The private class pointer.</div><div class="ttdef"><b>Definition:</b> <a href="p_impl_8h_source.html#l00076">pImpl.h:76</a></div></div>
+<div class="ttc" id="aclass_pimpl_class_html_af72d12bb22b1440a2618605b7b514327"><div class="ttname"><a href="class_pimpl_class.html#af72d12bb22b1440a2618605b7b514327">PimplClass::d_ptr</a></div><div class="ttdeci">std::unique_ptr&lt; Private &gt; d_ptr</div><div class="ttdoc">The private class pointer.</div><div class="ttdef"><b>Definition:</b> <a href="p_impl_8h_source.html#l00094">pImpl.h:94</a></div></div>
 <div class="ttc" id="astruct_pimpl_class_1_1_private_html"><div class="ttname"><a href="struct_pimpl_class_1_1_private.html">PimplClass::Private</a></div><div class="ttdoc">The PimplClass::Private class.</div><div class="ttdef"><b>Definition:</b> <a href="p_impl__p_8h_source.html#l00016">pImpl_p.h:16</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -146,7 +152,7 @@ $(document).ready(function(){initNavTree('p_impl_8h_source.html',''); initResiza
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><b>pImpl.h</b></li>
-    <li class="footer">Generated on Mon Aug 7 2023 18:51:55 for pImpl by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Mon Aug 14 2023 18:31:21 for pImpl by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

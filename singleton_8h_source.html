@@ -93,35 +93,43 @@ $(document).ready(function(){initNavTree('singleton_8h_source.html',''); initRes
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">   SPDX-License-Identifier: BSD-3-Clause</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="class_singleton.html">   26</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_singleton.html">Singleton</a> {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">static</span> T &amp;<a class="code" href="class_singleton.html#ad486cf51d0a40bec83b6a5ee40b7857c">instance</a>();</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="class_singleton.html#a23b2407170cc04f6746874704b928044">   38</a></span>&#160;    <a class="code" href="class_singleton.html#a23b2407170cc04f6746874704b928044">Singleton</a> (<span class="keyword">const</span> <a class="code" href="class_singleton.html">Singleton</a> &amp;) = <span class="keyword">delete</span>; </div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="class_singleton.html#a95170232f32d9e779eb5c6e45e4702d9">   42</a></span>&#160;    <a class="code" href="class_singleton.html">Singleton</a> &amp;<a class="code" href="class_singleton.html#a95170232f32d9e779eb5c6e45e4702d9">operator= </a>(<span class="keyword">const</span> <a class="code" href="class_singleton.html">Singleton</a>) = <span class="keyword">delete</span>; <span class="comment">// non copyable</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="class_singleton.html#a923b995920da9c06590adb170ab2f890">   45</a></span>&#160;    <a class="code" href="class_singleton.html#a923b995920da9c06590adb170ab2f890">Singleton</a>() {}</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;};</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef DOXYGEN</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define SINGLETON_I(Class) Class &amp; i = Class::instance()</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// DOXYGEN</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="class_singleton.html">   30</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_singleton.html">Singleton</a> {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">static</span> T &amp;<a class="code" href="class_singleton.html#ad486cf51d0a40bec83b6a5ee40b7857c">instance</a>();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="class_singleton.html#a23b2407170cc04f6746874704b928044">   42</a></span>&#160;    <a class="code" href="class_singleton.html#a23b2407170cc04f6746874704b928044">Singleton</a> (<span class="keyword">const</span> <a class="code" href="class_singleton.html">Singleton</a> &amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_singleton.html#a95170232f32d9e779eb5c6e45e4702d9">   46</a></span>&#160;    <a class="code" href="class_singleton.html">Singleton</a> &amp;<a class="code" href="class_singleton.html#a95170232f32d9e779eb5c6e45e4702d9">operator= </a>(<span class="keyword">const</span> <a class="code" href="class_singleton.html">Singleton</a>) = <span class="keyword">delete</span>; <span class="comment">// non copyable</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="class_singleton.html#ad486cf51d0a40bec83b6a5ee40b7857c">   49</a></span>&#160;T &amp;<a class="code" href="class_singleton.html#ad486cf51d0a40bec83b6a5ee40b7857c">Singleton&lt;T&gt;::instance</a>() {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keyword">static</span> T instance;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keywordflow">return</span> instance;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
-<div class="ttc" id="aclass_singleton_html"><div class="ttname"><a href="class_singleton.html">Singleton</a></div><div class="ttdoc">Singleton class.</div><div class="ttdef"><b>Definition:</b> <a href="singleton_8h_source.html#l00026">singleton.h:26</a></div></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="class_singleton.html#a923b995920da9c06590adb170ab2f890">   49</a></span>&#160;    <a class="code" href="class_singleton.html#a923b995920da9c06590adb170ab2f890">Singleton</a>() {}</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;};</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="class_singleton.html#ad486cf51d0a40bec83b6a5ee40b7857c">   53</a></span>&#160;T &amp;<a class="code" href="class_singleton.html#ad486cf51d0a40bec83b6a5ee40b7857c">Singleton&lt;T&gt;::instance</a>() {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keyword">static</span> T instance;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="keywordflow">return</span> instance;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#ifdef DOXYGEN</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#define SINGLETON_I(Class)</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// DOXYGEN</span></div>
+<div class="ttc" id="aclass_singleton_html"><div class="ttname"><a href="class_singleton.html">Singleton</a></div><div class="ttdoc">Singleton class.</div><div class="ttdef"><b>Definition:</b> <a href="singleton_8h_source.html#l00030">singleton.h:30</a></div></div>
 <div class="ttc" id="aclass_singleton_html_a23b2407170cc04f6746874704b928044"><div class="ttname"><a href="class_singleton.html#a23b2407170cc04f6746874704b928044">Singleton::Singleton</a></div><div class="ttdeci">Singleton(const Singleton &amp;)=delete</div><div class="ttdoc">Make the class non construction-copyable and non copyable.</div></div>
-<div class="ttc" id="aclass_singleton_html_a923b995920da9c06590adb170ab2f890"><div class="ttname"><a href="class_singleton.html#a923b995920da9c06590adb170ab2f890">Singleton::Singleton</a></div><div class="ttdeci">Singleton()</div><div class="ttdef"><b>Definition:</b> <a href="singleton_8h_source.html#l00045">singleton.h:45</a></div></div>
+<div class="ttc" id="aclass_singleton_html_a923b995920da9c06590adb170ab2f890"><div class="ttname"><a href="class_singleton.html#a923b995920da9c06590adb170ab2f890">Singleton::Singleton</a></div><div class="ttdeci">Singleton()</div><div class="ttdef"><b>Definition:</b> <a href="singleton_8h_source.html#l00049">singleton.h:49</a></div></div>
 <div class="ttc" id="aclass_singleton_html_a95170232f32d9e779eb5c6e45e4702d9"><div class="ttname"><a href="class_singleton.html#a95170232f32d9e779eb5c6e45e4702d9">Singleton::operator=</a></div><div class="ttdeci">Singleton &amp; operator=(const Singleton)=delete</div><div class="ttdoc">Make the class non copyable.</div></div>
-<div class="ttc" id="aclass_singleton_html_ad486cf51d0a40bec83b6a5ee40b7857c"><div class="ttname"><a href="class_singleton.html#ad486cf51d0a40bec83b6a5ee40b7857c">Singleton::instance</a></div><div class="ttdeci">static T &amp; instance()</div><div class="ttdoc">Get the instance object.</div><div class="ttdef"><b>Definition:</b> <a href="singleton_8h_source.html#l00049">singleton.h:49</a></div></div>
+<div class="ttc" id="aclass_singleton_html_ad486cf51d0a40bec83b6a5ee40b7857c"><div class="ttname"><a href="class_singleton.html#ad486cf51d0a40bec83b6a5ee40b7857c">Singleton::instance</a></div><div class="ttdeci">static T &amp; instance()</div><div class="ttdoc">Get the instance object.</div><div class="ttdef"><b>Definition:</b> <a href="singleton_8h_source.html#l00053">singleton.h:53</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><b>singleton.h</b></li>
-    <li class="footer">Generated on Mon Aug 7 2023 18:51:55 for pImpl by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Mon Aug 14 2023 18:31:21 for pImpl by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>
