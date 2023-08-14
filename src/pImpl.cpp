@@ -11,3 +11,13 @@ PimplClass::PimplClass (Private &dd) : d_ptr (&dd) {}
 
 // default destructor
 PimplClass::~PimplClass() {}
+
+// check if the object is null
+bool PimplClass::isNull() const {
+
+  return d_ptr == nullptr;
+}
+
+// clear or reset the object
+void PimplClass::clear() 
+{}
