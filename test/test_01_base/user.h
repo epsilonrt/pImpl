@@ -18,6 +18,7 @@ typedef std::string string_t;
 class User : public PimplClass {
   public:
     // Default constructor
+    // name is empty and age is 0
     User();
     // Constructor with parameters
     User (const string_t &name, int age);
@@ -29,6 +30,9 @@ class User : public PimplClass {
     void setAge (int age);
     // Sets the name
     void setName (const string_t &name);
+    // clear or reset the object
+    // after this call, the object is in the same state as after the default constructor
+    void clear();
     // Checks the parent access from the private implementation
     bool checkParentAccess() const;
   protected:

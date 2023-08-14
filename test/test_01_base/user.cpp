@@ -67,6 +67,20 @@ void User::setName (const string_t &name) {
   d->name = name;
 }
 
+// Clear or reset the object
+void User::clear() {
+  if (isNull()) {
+
+    d_ptr.reset (new Private (this));
+  }
+  else {
+    PIMPL_D (User);
+
+    d->name = "";
+    d->age = 0;
+  }
+}
+
 // Checks the parent access from the private implementation
 // for testing purpose
 // call the private implementation method passing by the PIMPL_D(const User) macro

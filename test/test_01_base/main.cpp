@@ -16,6 +16,7 @@ void tearDown (void) {
 void test_user_default_constructor (void) {
   User u;
 
+  TEST_ASSERT_FALSE (u.isNull());
   TEST_ASSERT_EQUAL (u.age(), 0);
   TEST_ASSERT_EQUAL (strlen (u.name().c_str()), 0);
 }
@@ -40,6 +41,9 @@ void test_user_setters (void) {
   TEST_ASSERT_EQUAL (u.age(), 42);
   u.setName ("John Doe");
   TEST_ASSERT_EQUAL (strcmp (u.name().c_str(), "John Doe"), 0);
+  u.clear();
+  TEST_ASSERT_EQUAL (u.age(), 0);
+  TEST_ASSERT_EQUAL (strlen (u.name().c_str()), 0);
 }
 
 void test_duser_default_constructor (void) {
