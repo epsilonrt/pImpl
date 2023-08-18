@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(pImpl VERSION 1.1.1 LANGUAGES C CXX)
+project(pImpl VERSION 1.1.3 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 
