@@ -20,7 +20,7 @@ var NAVTREEINDEX0 =
 "index.html#autotoc_md2":[0],
 "pages.html":[],
 "struct_pimpl_class_1_1_private.html":[1,0,0,0],
+"struct_pimpl_class_1_1_private.html#a08db75a7da87d95fee5d2f7348c6d346":[1,0,0,0,0],
 "struct_pimpl_class_1_1_private.html#a79e7a6a7c945908d357f26f209989a8d":[1,0,0,0,2],
-"struct_pimpl_class_1_1_private.html#a86dfa231ccf3432a8edbf4f49a6a850a":[1,0,0,0,0],
 "struct_pimpl_class_1_1_private.html#afca746343b5daafa3a515961ae06f7e6":[1,0,0,0,1]
 };

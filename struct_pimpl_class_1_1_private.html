@@ -104,9 +104,9 @@ Collaboration diagram for PimplClass::Private:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a86dfa231ccf3432a8edbf4f49a6a850a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_pimpl_class_1_1_private.html#a86dfa231ccf3432a8edbf4f49a6a850a">Private</a> (<a class="el" href="class_pimpl_class.html">PimplClass</a> *q)</td></tr>
-<tr class="memdesc:a86dfa231ccf3432a8edbf4f49a6a850a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="struct_pimpl_class_1_1_private.html" title="The PimplClass::Private class.">Private</a> object.  <a href="struct_pimpl_class_1_1_private.html#a86dfa231ccf3432a8edbf4f49a6a850a">More...</a><br /></td></tr>
-<tr class="separator:a86dfa231ccf3432a8edbf4f49a6a850a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08db75a7da87d95fee5d2f7348c6d346"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_pimpl_class_1_1_private.html#a08db75a7da87d95fee5d2f7348c6d346">Private</a> (<a class="el" href="class_pimpl_class.html">PimplClass</a> *q=nullptr)</td></tr>
+<tr class="memdesc:a08db75a7da87d95fee5d2f7348c6d346"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="struct_pimpl_class_1_1_private.html" title="The PimplClass::Private class.">Private</a> object.  <a href="struct_pimpl_class_1_1_private.html#a08db75a7da87d95fee5d2f7348c6d346">More...</a><br /></td></tr>
+<tr class="separator:a08db75a7da87d95fee5d2f7348c6d346"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afca746343b5daafa3a515961ae06f7e6"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_pimpl_class_1_1_private.html#afca746343b5daafa3a515961ae06f7e6">~Private</a> ()=default</td></tr>
 <tr class="memdesc:afca746343b5daafa3a515961ae06f7e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="struct_pimpl_class_1_1_private.html" title="The PimplClass::Private class.">Private</a> object.  <a href="struct_pimpl_class_1_1_private.html#afca746343b5daafa3a515961ae06f7e6">More...</a><br /></td></tr>
 <tr class="separator:afca746343b5daafa3a515961ae06f7e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -119,12 +119,13 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="struct_pimpl_class_1_1_private.html" title="The PimplClass::Private class.">PimplClass::Private</a> class. </p>
-<p>This class is the private class of the <a class="el" href="class_pimpl_class.html" title="PimplClass.">PimplClass</a> class, it is used to hide the implementation of the <a class="el" href="class_pimpl_class.html" title="PimplClass.">PimplClass</a> class. Only the <a class="el" href="class_pimpl_class.html" title="PimplClass.">PimplClass</a> class and childrens can access it. </p>
+<p>This class is the private class of the <a class="el" href="class_pimpl_class.html" title="PimplClass.">PimplClass</a> class, it is used to hide the implementation of the <a class="el" href="class_pimpl_class.html" title="PimplClass.">PimplClass</a> class. Only the <a class="el" href="class_pimpl_class.html" title="PimplClass.">PimplClass</a> class and childrens can access it.</p>
+<dl class="section note"><dt>Note</dt><dd>This class is not copyable because it contains a const pointer which therefore cannot be assigned after calling the constructor. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="p_impl__p_8h_source.html#l00016">16</a> of file <a class="el" href="p_impl__p_8h_source.html">pImpl_p.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="p_impl__p_8h_source.html#l00019">19</a> of file <a class="el" href="p_impl__p_8h_source.html">pImpl_p.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a86dfa231ccf3432a8edbf4f49a6a850a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a86dfa231ccf3432a8edbf4f49a6a850a">&#9670;&nbsp;</a></span>Private()</h2>
+<a id="a08db75a7da87d95fee5d2f7348c6d346"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08db75a7da87d95fee5d2f7348c6d346">&#9670;&nbsp;</a></span>Private()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -136,7 +137,7 @@ Public Attributes</h2></td></tr>
           <td class="memname">PimplClass::Private::Private </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_pimpl_class.html">PimplClass</a> *&#160;</td>
-          <td class="paramname"><em>q</em></td><td>)</td>
+          <td class="paramname"><em>q</em> = <code>nullptr</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -151,12 +152,12 @@ Public Attributes</h2></td></tr>
 <p>Constructor that initializes the q-ptr</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">q</td><td>pointer to the API class </td></tr>
+    <tr><td class="paramname">q</td><td>pointer to the API class, if not specified, the q-ptr will not be used </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="p_impl__p_8h_source.html#l00024">24</a> of file <a class="el" href="p_impl__p_8h_source.html">pImpl_p.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="p_impl__p_8h_source.html#l00027">27</a> of file <a class="el" href="p_impl__p_8h_source.html">pImpl_p.h</a>.</p>
 
 </div>
 </div>
@@ -203,7 +204,7 @@ Public Attributes</h2></td></tr>
 
 <p>q-ptr that points to the API class </p>
 
-<p class="definition">Definition at line <a class="el" href="p_impl__p_8h_source.html#l00036">36</a> of file <a class="el" href="p_impl__p_8h_source.html">pImpl_p.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="p_impl__p_8h_source.html#l00039">39</a> of file <a class="el" href="p_impl__p_8h_source.html">pImpl_p.h</a>.</p>
 
 </div>
 </div>
@@ -213,7 +214,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_pimpl_class.html">PimplClass</a></li><li class="navelem"><a class="el" href="struct_pimpl_class_1_1_private.html">Private</a></li>
-    <li class="footer">Generated on Mon Aug 14 2023 18:31:21 for pImpl by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri Aug 18 2023 20:46:37 for pImpl by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>
