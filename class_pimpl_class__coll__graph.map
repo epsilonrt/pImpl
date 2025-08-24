@@ -1,6 +1,12 @@
 <map id="PimplClass" name="PimplClass">
-<area shape="rect" id="node1" title="PimplClass." alt="" coords="43,440,174,561"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,285,212,377"/>
-<area shape="rect" id="node3" title=" " alt="" coords="30,145,187,223"/>
-<area shape="rect" id="node4" title=" " alt="" coords="89,5,128,83"/>
+<area shape="rect" id="Node000001" title="PimplClass." alt="" coords="87,5,208,131"/>
+<area shape="rect" id="Node000003" href="$struct_pimpl_class_1_1_private.html" title="The PimplClass::Private class." alt="" coords="5,193,145,279"/>
+<area shape="poly" id="edge3_Node000003_Node000001" title=" " alt="" coords="123,132,102,179,97,177,118,130"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="95,341,293,421"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="187,342,162,155,161,147,166,146,167,154,192,341"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="112,277,153,327,149,330,108,281"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="267,203,417,269"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="301,280,236,343,232,339,298,276"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="331,35,353,101"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="345,101,345,187,339,187,339,101"/>
 </map>
