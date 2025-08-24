@@ -1,0 +1,29 @@
+# Dockerfile to build CMake project on armhf with a raspios image
+ARG BASE_IMAGE=ghcr.io/raspberrypi/raspios:bookworm-armhf
+FROM ${BASE_IMAGE}
+
+# Install required dependencies for CMake and build
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+      build-essential \
+      cmake \
+      git \
+      ninja-build \
+      ca-certificates \
+      gnupg \
+      && rm -rf /var/lib/apt/lists/*
+
+# Add the GPG key of the repository (if necessary)
+RUN wget -O- http://www.piduino.org/piduino-key.asc | gpg --dearmor --yes --output /usr/share/keyrings/piduino-archive-keyring.gpg
+
+# Add the repository to the sources list
+RUN echo 'deb [signed-by=/usr/share/keyrings/piduino-archive-keyring.gpg] http://apt.piduino.org bookworm main' > /etc/apt/sources.list.d/piduino.list
+
+# Update the package list
+RUN apt-get update && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /workspace
+COPY . /workspace
+
+# Default command (adapt to your project if needed)
+CMD ["cmake", "-S", ".", "-B", "build", "&&", "cmake", "--build", "build"]
