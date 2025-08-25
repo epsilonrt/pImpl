@@ -1,4 +1,4 @@
-name: Build CMake on arm64 (raspios)
+name: Build CMake on arm64 (debian)
 
 on:
   workflow_dispatch:

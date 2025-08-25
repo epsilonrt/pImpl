@@ -11,6 +11,7 @@ RUN apt-get update && \
       ninja-build \
       ca-certificates \
       gnupg \
+      wget \
       && rm -rf /var/lib/apt/lists/*
 
 # Add the GPG key of the repository (if necessary)
