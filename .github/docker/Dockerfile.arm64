@@ -11,11 +11,11 @@ RUN apt-get update && \
       ninja-build \
       ca-certificates \
       gnupg \
-      wget \
       && rm -rf /var/lib/apt/lists/*
 
-# Add the GPG key of the repository (if necessary)
-RUN wget -O- http://www.piduino.org/piduino-key.asc | gpg --dearmor --yes --output /usr/share/keyrings/piduino-archive-keyring.gpg
+# Add the GPG key of the repository (from local file)
+COPY piduino-key.asc /usr/share/keyrings/piduino-archive-keyring.asc
+RUN gpg --dearmor --yes --output /usr/share/keyrings/piduino-archive-keyring.gpg /usr/share/keyrings/piduino-archive-keyring.asc
 
 # Add the repository to the sources list
 RUN echo 'deb [signed-by=/usr/share/keyrings/piduino-archive-keyring.gpg] http://apt.piduino.org bookworm main' > /etc/apt/sources.list.d/piduino.list
