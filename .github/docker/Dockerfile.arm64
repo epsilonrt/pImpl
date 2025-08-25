@@ -13,8 +13,7 @@ RUN apt-get update && \
       gnupg \
       && rm -rf /var/lib/apt/lists/*
 
-# Add the GPG key of the repository (from local file)
-COPY piduino-key.asc /usr/share/keyrings/piduino-archive-keyring.asc
+COPY .github/docker/piduino-key.asc /usr/share/keyrings/piduino-archive-keyring.asc
 RUN gpg --dearmor --yes --output /usr/share/keyrings/piduino-archive-keyring.gpg /usr/share/keyrings/piduino-archive-keyring.asc
 
 # Add the repository to the sources list
