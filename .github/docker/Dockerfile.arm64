@@ -27,4 +27,4 @@ WORKDIR /workspace
 COPY . /workspace
 
 # Default command (adapt to your project if needed)
-CMD ["cmake", "-S", ".", "-B", "build", "&&", "cmake", "--build", "build"]
+CMD ["sh", "-c", "cmake -S . -B build && cmake --build build"]
