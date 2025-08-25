@@ -1,5 +1,5 @@
 # Dockerfile to build CMake project on armhf with a raspios image
-ARG BASE_IMAGE=ghcr.io/raspberrypi/raspios:bookworm-armhf
+ARG BASE_IMAGE=arm32v7/debian:bookworm
 FROM ${BASE_IMAGE}
 
 # Install required dependencies for CMake and build
